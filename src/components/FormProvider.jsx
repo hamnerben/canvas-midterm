@@ -2,7 +2,7 @@ import {createContext, useContext, useState} from "react";
 
 const FormContext = createContext();
 
-export default function FormProvider ({children, onSubmit, defaultValue})  {
+export default function FormProvider ({children, onSubmit, defaultValue=null})  {
     const [form, setForm] =  useState(defaultValue);
     const [errors, setErrors] = useState({});
 
