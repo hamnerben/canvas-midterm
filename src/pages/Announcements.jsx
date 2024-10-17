@@ -55,7 +55,7 @@ export default function Announcements() {
         );
       })}
 
-      <Button text="Add Announcement" onClick={() => navigate("/announcements/create")} />
+      <Button onClick={() => navigate("/announcements/create")}>Add Announcement</Button>
       </div>
     </>
   );

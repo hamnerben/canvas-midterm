@@ -31,12 +31,12 @@ export default function AnnouncementsEdit() {
 
     return (
         <>
-        <h2>Post Announcment</h2>
+        <h1>Edit Announcment</h1>
         <div >
         <FormProvider  defaultValue={announcement} onSubmit={handleSubmit}>
             <TextInput name="title" label="Title" />
             <TextInput  name="content" label="Content" />
-            <SubmitButton >Post</SubmitButton>
+            <SubmitButton >Save Edit</SubmitButton>
         </FormProvider>
         </div>
         </>

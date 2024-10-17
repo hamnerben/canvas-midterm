@@ -8,9 +8,6 @@ import { useEffect } from "react";
 export default function RegisterPage() {
     const auth = useAuth();
     
-
-
-    
     const handleSubmit = async (form) => {
         await auth.register(form);
     }

@@ -14,12 +14,12 @@ export default function AnnouncementsCreate() {
 
     return (
         <>
-        <h2>Create Announcments</h2>
+        <h1>Post Announcments</h1>
         <div>
         <FormProvider onSubmit={handleSubmit}>
             <TextInput name="title" label="Title" />
             <TextInput name="content" label="Content" />
-            <SubmitButton >Create</SubmitButton>
+            <SubmitButton >Post</SubmitButton>
         </FormProvider>
         </div>
 
