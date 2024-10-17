@@ -32,6 +32,7 @@ export default function Announcements() {
     setLoading(false);
   };
 
+
   if(loading) {
     return <p>Loading...</p>
   }
@@ -49,6 +50,7 @@ export default function Announcements() {
             showDelete={showDelete}
             showEdit={showEdit}
             onDelete={() => handleDelete(announcement.title)}
+            onEdit={() => navigate(`/announcements/edit/${announcement.id}`)}
           />
         );
       })}

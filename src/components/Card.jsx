@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 
-export default function Card({title, content, showDelete, showEdit, onDelete}) {
+export default function Card({title, content, showDelete, showEdit, onDelete, onEdit}) {
 
       
     const cardContent = (
@@ -22,7 +22,7 @@ export default function Card({title, content, showDelete, showEdit, onDelete}) {
         </CardContent>
         <CardActions>
           {showDelete && <Button onClick={onDelete} size="small">Delete</Button>}
-          {showEdit && <Button size="small">Edit</Button>}
+          {showEdit && <Button onClick={onEdit} size="small">Edit</Button>}
         </CardActions>
       </React.Fragment>
     );
