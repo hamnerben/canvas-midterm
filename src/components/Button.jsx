@@ -4,6 +4,6 @@ import MuiButton from '@mui/material/Button';
 
 export default function Button({text, onClick}) {
   return (
-          <MuiButton onClick={onClick} variant="contained">{text}</MuiButton>
+          <MuiButton onClick={ onClick} variant="contained">{text}</MuiButton>
       );
 }

@@ -1,6 +1,6 @@
 import {useForm} from "./FormProvider";
 
-export const SubmitButton = ({children}) => {
+export default function SubmitButton ({children}) {
     const {handleSubmit} = useForm();
 
     return (

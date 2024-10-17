@@ -1,32 +1,40 @@
 import Card from "../components/Card";
-import { useState, nav } from "react";
+import { useEffect, useState, nav } from "react";
 import Button from "../components/Button";
 import {useApi} from "../apiV3";
 import { useParams, useNavigate } from "react-router-dom";
 
 export default function Announcements() {
 
-  const fetchedAnnouncments = useApi('announcements').getAll()
+  
+  const [loading, setLoading] = useState(true);
   const [showDelete, setShowDelete] = useState(true);
   const [showEdit, setShowEdit] = useState(true);
-  const [announcements, setAnnouncements] = useState([
-    {
-      title: "title of the announcement",
-      body: "This is the first announcement!",
-    },
-  ]);
+  const [announcements, setAnnouncements] = useState([]);
   const navigate = useNavigate();
 
-  const handleAddAnnouncement = () => {
-   const tempAnouncement = {
-        title: `temporary added announcement number ${announcements.length + 1}`,
-        body: `This is the announcement number ${announcements.length + 1}!`,
-      }
-        useApi('announcements').create(tempAnouncement)
-        .then(() => {
-          setAnnouncements([...announcements, tempAnouncement])
-        })
-}
+  useEffect(() => {
+    const fetchData = async () => {
+      const fetchedAnnouncments = await useApi('announcements').getAll();
+      setAnnouncements(fetchedAnnouncments);
+      setLoading(false);
+    };
+    fetchData();
+  }, []);
+
+  const handleDelete = async (title) => {
+    console.log("to delete", title);
+    setLoading(true);
+    const announcementObj = await useApi('announcements').getByField('title', title);
+    await useApi('announcements').delete(announcementObj.id);
+    const fetchedAnnouncments = await useApi('announcements').getAll();
+    setAnnouncements(fetchedAnnouncments);
+    setLoading(false);
+  };
+
+  if(loading) {
+    return <p>Loading...</p>
+  }
 
   return (
     <>
@@ -37,9 +45,10 @@ export default function Announcements() {
           <Card 
             key={announcement.title}
             title={announcement.title}
-            body={announcement.body}
+            content={announcement.content}
             showDelete={showDelete}
             showEdit={showEdit}
+            onDelete={() => handleDelete(announcement.title)}
           />
         );
       })}
