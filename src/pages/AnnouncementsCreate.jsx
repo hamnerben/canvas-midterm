@@ -15,11 +15,13 @@ export default function AnnouncementsCreate() {
     return (
         <>
         <h2>Create Announcments</h2>
+        <div>
         <FormProvider onSubmit={handleSubmit}>
             <TextInput name="title" label="Title" />
             <TextInput name="content" label="Content" />
             <SubmitButton >Create</SubmitButton>
         </FormProvider>
+        </div>
 
         </>
     )

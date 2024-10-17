@@ -32,7 +32,7 @@ export default function AnnouncementsEdit() {
     return (
         <>
         <h2>Post Announcment</h2>
-        <div className="flex-col">
+        <div >
         <FormProvider  defaultValue={announcement} onSubmit={handleSubmit}>
             <TextInput name="title" label="Title" />
             <TextInput  name="content" label="Content" />

@@ -7,7 +7,7 @@ export default function LoginPage() {
     const auth = useAuth();
   return (
     <>
-      <h2>LoginPage!</h2>
+      <h1>LoginPage</h1>
       <div className="flex-col">
       
         <FormProvider>

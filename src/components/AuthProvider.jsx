@@ -2,38 +2,47 @@ import {createContext, useState, useContext} from 'react';
 import {useApi} from "../apiV3";
 
 export const AuthContext = createContext();
+const apiUsers = useApi('users');
 
 export default function AuthProvider({children}) {
     const [user, setUser] = useState(null);
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
 
-    const login = async (email, password) => {
-        setIsLoading(true);
-        const useApi = useApi('users');
 
-        const fetchedUser = useApi.get(email);
-        if (fetchedUser && fetchedUser.password === password) {
-            setUser(fetchedUser);
-        } else if(!fetchedUser) {
-            setError('Invalid email');
-        } else {
-            setError('Invalid password');
+
+    const login = async ({email, password}) => {
+        setIsLoading(true);
+        try{
+            const fetchedUser = apiUsers.get(email);
+            if (fetchedUser && fetchedUser.password === password) {
+                setUser(fetchedUser);
+            } else if(!fetchedUser) {
+                setError('Invalid email');
+            } else {
+                setError('Invalid password');
+            }
+        } catch (caughtError) {
+            setError('Error during login: ' + caughtError);
+        } finally{
+            setIsLoading(false);
         }
-        setIsLoading(false);
     }
 
-    const register = async (email, password) => {
+    const register = async ({email, password}) => {
         setIsLoading(true);
-        const useApi = useApi('users');
-        
-        if (useApi.get(email)) {
-            setError('Email already exists');
-        } else {
-            let user = {email, password};
-            let id = await useApi.create('users', user);
-            user.id = id;
-            setUser(user);
+        try{
+            const fetchedUser = await apiUsers.getByField("email", email);
+            if (fetchedUser) {
+                setError('Email already exists');
+            } else {
+                let user = {email, password};
+                let id = await apiUsers.create(user);
+                user.id = id;
+                setUser(user);
+            }
+        } catch (caughtError) {
+            setError('Error during registration: ' + caughtError);
         }
         setIsLoading(false);
     }

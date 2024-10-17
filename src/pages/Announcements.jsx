@@ -40,7 +40,7 @@ export default function Announcements() {
   return (
     <>
     <div className="w-full px-6 flex flex-col items-start space-y-4">
-      <h1>Announcements!</h1>
+      <h1>Announcements</h1>
       {announcements.map((announcement) => {
         return (
           <Card 
