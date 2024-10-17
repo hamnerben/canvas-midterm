@@ -13,8 +13,9 @@ export default function AuthProvider({children}) {
 
     const login = async ({email, password}) => {
         setIsLoading(true);
+        setUser(null);
         try{
-            const fetchedUser = apiUsers.get(email);
+            const fetchedUser = await apiUsers.getByField("email", email);
             if (fetchedUser && fetchedUser.password === password) {
                 setUser(fetchedUser);
             } else if(!fetchedUser) {

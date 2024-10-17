@@ -5,12 +5,17 @@ import  SubmitButton  from "../components/SubmitButton";
 
 export default function LoginPage() {
     const auth = useAuth();
+
+    const handleSubmit = async (form) => {
+        await auth.login(form);
+    }
+
   return (
     <>
       <h1>LoginPage</h1>
       <div className="flex-col">
-      
-        <FormProvider>
+      {auth.user && <p className="text-green-600">Logged in as {auth.user.email}</p>}
+        <FormProvider onSubmit={handleSubmit}>
             <TextInput name="email" label="Email" type="email" />
             <TextInput name="password" label="Password" type="password" />
             <SubmitButton>Login</SubmitButton>
