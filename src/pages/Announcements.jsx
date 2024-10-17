@@ -1,5 +1,6 @@
 import Card from "../components/Card";
 import { useState } from "react";
+import Button from "../components/Button";
 
 export default function Announcements() {
   const [showDelete, setShowDelete] = useState(true);
@@ -16,13 +17,20 @@ export default function Announcements() {
     <>
     <div className="flex flex-col items-start space-y-4">
       <h1>Announcements!</h1>
-      <Card 
-        className="text-left"
-        title="title fo the annoucnment"
-        body="This is the first announcement!"
-        showDelete={showDelete}
-        showEdit={showEdit}
-      />
+      {announcements.map((announcement) => {
+        return (
+          <Card 
+            key={announcement.title}
+            className="text-left"
+            title={announcement.title}
+            body={announcement.body}
+            showDelete={showDelete}
+            showEdit={showEdit}
+          />
+        );
+      })}
+      
+      <Button text="Add Announcement" onClick={() => console.log("Add Announcement")} />
       </div>
     </>
   );

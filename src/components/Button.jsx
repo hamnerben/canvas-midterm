@@ -1,9 +1,9 @@
 import * as React from 'react';
 import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
+import MuiButton from '@mui/material/Button';
 
-export default function Button(text, onClick) {
+export default function Button({text, onClick}) {
   return (
-          <Button onClick={onClick} variant="contained">{text}</Button>
+          <MuiButton onClick={onClick} variant="contained">{text}</MuiButton>
       );
 }
