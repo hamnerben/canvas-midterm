@@ -16,16 +16,16 @@ export default function LoginPage() {
   return (
     <>
       <h1>LoginPage</h1>
-      <div className="flex-col">
       {auth.user && <p className="text-green-600">Logged in as {auth.user.email}</p>}
         <FormProvider onSubmit={handleSubmit}>
             <TextInput name="email" label="Email" type="email" />
             <TextInput name="password" label="Password" type="password" />
-            <SubmitButton>Login</SubmitButton>
+            <SubmitButton  >Login</SubmitButton>
         </FormProvider>
         {auth.error && <p className="text-red-600">{auth.error}</p>}
+        <div className="w-5">
+        <Button onClick={() => navigate("/register")}>Register Page</Button>
         </div>
-        <Button onClick={navigate("/register")}>Register</Button>
     </>
   );
 }
