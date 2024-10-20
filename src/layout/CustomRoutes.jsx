@@ -5,7 +5,6 @@ import Announcements from "../pages/Announcements";
 import AnnouncementsCreate from "../pages/AnnouncementsCreate";
 import AnnouncementsEdit from "../pages/AnnouncementsEdit";
 import RegisterPage from "../pages/RegisterPage";
-import ProfilePage from "../pages/ProfilePage";
 import { useAuth } from "../components/AuthProvider";
 import Button  from "../components/Button"
 import Header from "./Header"
@@ -17,8 +16,8 @@ export default function CustomRoutes() {
   const auth = useAuth();
 return (
 <>
-{auth.user ? <h2>${auth.user.email} is logged in</h2> : <h2>Not logged in</h2>}
-{auth.user ? <Button className="w-3" onClick={() => {auth.logout()}}>Log out</Button> : ""}
+{/* {auth.user ? <h2>{auth.user.email} is logged in</h2> : <h2>Not logged in</h2>}
+{auth.user ? <Button className="w-3" onClick={() => {auth.logout()}}>Log out</Button> : ""} */}
 
     <Router>
     <Header />
@@ -29,7 +28,6 @@ return (
       {auth.user && (  // if user is logged in, show these routes
         <>
       <Route path="/" element={<HomePage />} />
-      <Route path="/profile" element={<ProfilePage />} />
       <Route path="/announcements" element={<Announcements />} />
       <Route
         path="/announcements/edit/:id"

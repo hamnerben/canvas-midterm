@@ -21,8 +21,8 @@ export default function pages() {
       const fetchedpages = await useApi('pages').getAll();
       setpages(fetchedpages);
       setLoading(false);
-
-
+      setIsTeacher(auth.user.isTeacher)
+      console.log("isTeacher: ", auth.user)
     };
     fetchData();
   }, []);
