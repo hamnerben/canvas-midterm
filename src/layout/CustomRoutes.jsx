@@ -8,11 +8,16 @@ import RegisterPage from "../pages/RegisterPage";
 import Pages from "../pages/Pages";
 import ProfilePage from "../pages/ProfilePage";
 import { useAuth } from "../components/AuthProvider";
+import Button  from "../components/Button"
 
 
 export default function CustomRoutes() {
   const auth = useAuth();
 return (
+<>
+{auth.user ? <h2>${auth.user.email} is logged in</h2> : <h2>Not logged in</h2>}
+{auth.user ? <Button className="w-3" onClick={() => {auth.logout()}}>Log out</Button> : ""}
+
     <Router>
     <Routes>
       <Route path="/login" element={<LoginPage />} />
@@ -37,5 +42,6 @@ return (
 
     </Routes>
   </Router>
+  </>
 )
 }
