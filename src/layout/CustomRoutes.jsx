@@ -5,11 +5,13 @@ import Announcements from "../pages/Announcements";
 import AnnouncementsCreate from "../pages/AnnouncementsCreate";
 import AnnouncementsEdit from "../pages/AnnouncementsEdit";
 import RegisterPage from "../pages/RegisterPage";
-import Pages from "../pages/Pages";
 import ProfilePage from "../pages/ProfilePage";
 import { useAuth } from "../components/AuthProvider";
 import Button  from "../components/Button"
-
+import Header from "./Header"
+import Pages from "../pages/Pages";
+import PagesCreate from "../pages/PagesCreate";
+import PagesEdit from "../pages/PagesEdit";
 
 export default function CustomRoutes() {
   const auth = useAuth();
@@ -19,11 +21,12 @@ return (
 {auth.user ? <Button className="w-3" onClick={() => {auth.logout()}}>Log out</Button> : ""}
 
     <Router>
+    <Header />
     <Routes>
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
 
-      {true && (  // if user is logged in, show these routes
+      {auth.user && (  // if user is logged in, show these routes
         <>
       <Route path="/" element={<HomePage />} />
       <Route path="/profile" element={<ProfilePage />} />
@@ -37,6 +40,14 @@ return (
         element={<AnnouncementsCreate />}
       />
       <Route path="/pages" element={<Pages />} />
+      <Route
+        path="/pages/edit/:id"
+        element={<PagesEdit />}
+      />
+      <Route
+        path="/pages/create"
+        element={<PagesCreate />}
+      />
       </>
       )}
 
