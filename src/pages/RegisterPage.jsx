@@ -6,14 +6,14 @@ import { useApi } from "../apiV3";
 import { useEffect } from "react";
 import  Button  from "../components/Button";
 import { useNavigate } from "react-router-dom";
-import { Checkbox } from "@mui/material";
+import Checkbox from "../components/Checkbox";
 
 export default function RegisterPage() {
     const auth = useAuth();
     const navigate = useNavigate();
     const handleSubmit = async (form) => {
+      console.log("form: ", form);
         await auth.register(form);
-        console.log("form: ", form);
     }
 
   return (
@@ -23,7 +23,6 @@ export default function RegisterPage() {
           <div>
             <TextInput name="email" label="Email" type="email" />
             <TextInput name="password" label="Password" type="password" />
-            <p>Check the checkbox if you are a teacher</p>
             <Checkbox name="isTeacher" label="I am a teacher" type="checkbox" />
             <SubmitButton>Register</SubmitButton>
           </div>

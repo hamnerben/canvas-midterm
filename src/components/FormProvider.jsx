@@ -11,7 +11,6 @@ export default function FormProvider ({children, onSubmit, defaultValue=null})  
             ...prevState,
             [name]: value
         }));
-        console.log("set ", name, " to ", value);
     }
 
     const handleSubmit = () => {

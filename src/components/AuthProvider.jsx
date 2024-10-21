@@ -12,6 +12,7 @@ export default function AuthProvider({children}) {
 
 
     const login = async ({email, password}) => {
+        setError(null);
         setIsLoading(true);
         setUser(null);
         try{
@@ -30,14 +31,15 @@ export default function AuthProvider({children}) {
         }
     }
 
-    const register = async ({email, password}) => {
+    const register = async ({email, password, isTeacher}) => {
+        setError(null);
         setIsLoading(true);
         try{
             const fetchedUser = await apiUsers.getByField("email", email);
             if (fetchedUser) {
                 setError('Email already exists');
             } else {
-                let user = {email, password};
+                let user = {email, password, isTeacher};
                 let id = await apiUsers.create(user);
                 user.id = id;
                 setUser(user);
@@ -49,6 +51,7 @@ export default function AuthProvider({children}) {
     }
 
     const logout = () => {
+        setError(null);
         setUser(null);
     }
 

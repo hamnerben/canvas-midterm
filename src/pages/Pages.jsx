@@ -10,8 +10,6 @@ export default function pages() {
   
   const [loading, setLoading] = useState(true);
   const [isTeacher, setIsTeacher] = useState(false)
-  const [showDelete, setShowDelete] = useState(true);
-  const [showEdit, setShowEdit] = useState(true);
   const [pages, setpages] = useState([]);
   const navigate = useNavigate();
   const auth = useAuth()
@@ -22,7 +20,7 @@ export default function pages() {
       setpages(fetchedpages);
       setLoading(false);
       setIsTeacher(auth.user.isTeacher)
-      console.log("isTeacher: ", auth.user)
+      console.log("user: ", auth.user)
     };
     fetchData();
   }, []);
@@ -59,8 +57,8 @@ export default function pages() {
           />
         );
       })}
-
-      <Button onClick={() => navigate("/pages/create")}>Add page</Button>
+      {isTeacher ? <Button onClick={() => navigate("/pages/create")}>Add page</Button> : ""}
+      
       </div>
     </>
   );

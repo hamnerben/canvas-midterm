@@ -3,20 +3,22 @@ import { useEffect, useState, nav } from "react";
 import Button from "../components/Button";
 import {useApi} from "../apiV3";
 import { useParams, useNavigate } from "react-router-dom";
+import {useAuth} from "../components/AuthProvider";
 
 export default function Announcements() {
 
   
   const [loading, setLoading] = useState(true);
-  const [showDelete, setShowDelete] = useState(true);
-  const [showEdit, setShowEdit] = useState(true);
   const [announcements, setAnnouncements] = useState([]);
+  const [isTeacher, setIsTeacher] = useState(false)
+  const auth = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
       const fetchedAnnouncments = await useApi('announcements').getAll();
       setAnnouncements(fetchedAnnouncments);
+      setIsTeacher(auth.user.isTeacher);
       setLoading(false);
     };
     fetchData();
@@ -47,15 +49,15 @@ export default function Announcements() {
             key={announcement.title}
             title={announcement.title}
             content={announcement.content}
-            showDelete={showDelete}
-            showEdit={showEdit}
+            showDelete={isTeacher}
+            showEdit={isTeacher}
             onDelete={() => handleDelete(announcement.title)}
             onEdit={() => navigate(`/announcements/edit/${announcement.id}`)}
           />
         );
       })}
-
-      <Button onClick={() => navigate("/announcements/create")}>Add Announcement</Button>
+      
+      {isTeacher ? <Button onClick={() => navigate("/announcements/create")}>Add Announcement</Button> : ""}
       </div>
     </>
   );
